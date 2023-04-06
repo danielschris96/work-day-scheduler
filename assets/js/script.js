@@ -1,27 +1,5 @@
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
+
 $(function () {
-  // TODO: Add a listener for click events on the save button. This code should
-  // use the id in the containing time-block as a key to save the user input in
-  // local storage. HINT: What does `this` reference in the click listener
-  // function? How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
-  //
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
-  //
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
-  //
-  // TODO: Add code to display the current date in the header of the page.
-
-
 // this function uses day.js to call the curent date in the chosen format below
 var today = dayjs();
 $('#currentDay').text(today.format('dddd, MMMM D YYYY'));
@@ -49,15 +27,22 @@ for (var i = 9; i < 18; i++) {
 
 // this event listener handles the save button and grabs the id of the row as well as the input in the textbox and stores them in local storage
 $(".saveBtn").on("click", function (){
+  // finds the id of the parent div to identify which hour row it is coming from
   var rowID = $(this).parent().attr("id");
+  // takes in the user input and stores it in a variable
   var textInput = $(this).siblings(".description").val();
+  // sets the row id and user input into key/value pairs in local storage
   localStorage.setItem(rowID, textInput);
 })
 
+// this for loop retrieves local storage
 for (var i = 0; i < localStorage.length; i++) {
+  // setting variables for the key/value pair
 var key = localStorage.key(i);
 var value = localStorage.getItem(key);
-var textbox = $("#" + key);
-textbox.children(".description").html(value);
+// sets the divID equal to the id of the hour row div that it belongs to
+var divID = $("#" + key);
+// inputs the value from local storage back into the text area of the respective hour row
+divID.children(".description").html(value);
 }});
 
