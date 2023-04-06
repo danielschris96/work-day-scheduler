@@ -22,14 +22,19 @@ $(function () {
   // TODO: Add code to display the current date in the header of the page.
 });
 
+// this function uses day.js to call the curent date in the chosen format below
 var today = dayjs();
 $('#currentDay').text(today.format('dddd, MMMM D YYYY'));
 
+// this day.js method calls the current hour value on a 24hr format
 var currentHour = dayjs().hour()
 
-
-for (var i = 9; i <= 17; i++) {
+// this for loop iterates through the hour blocks and assigns classes based on if the compared hour is in the past, present, or future.
+// var i is run from 9 to 17 because that corresponds to our 9am to 5pm schedule.
+for (var i = 9; i < 18; i++) {
+  // setting the id to hour + the value of i makes the iteration consistent with the element id's
   var id = "hour-" + i;
+  // this 'if' compares the value of the current hour
   if (currentHour === parseInt(id.match(/\d+/)[0], 10)) {
     $("#" + id).addClass("present");
   } 
@@ -42,5 +47,7 @@ for (var i = 9; i <= 17; i++) {
 }
 
 $(".saveBtn").on("click", function (){
-  console.log("h")
+  var rowID = $(this).parent().attr("id");
+  var textInput = $(this).siblings(".description").val();
+  localStorage.setItem(rowID, textInput);
 })
