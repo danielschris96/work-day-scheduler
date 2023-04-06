@@ -25,3 +25,22 @@ $(function () {
 var today = dayjs();
 $('#currentDay').text(today.format('dddd, MMMM D YYYY'));
 
+var currentHour = dayjs().hour()
+
+
+for (var i = 9; i <= 17; i++) {
+  var id = "hour-" + i;
+  if (currentHour === parseInt(id.match(/\d+/)[0], 10)) {
+    $("#" + id).addClass("present");
+  } 
+  else if (currentHour < parseInt(id.match(/\d+/)[0], 10)) {
+    $("#" + id).addClass("future");
+  }
+  else {
+    $("#" + id).addClass("past");
+  }
+}
+
+$(".saveBtn").on("click", function (){
+  console.log("h")
+})
