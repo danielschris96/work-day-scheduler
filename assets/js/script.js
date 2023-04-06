@@ -20,7 +20,7 @@ $(function () {
   // attribute of each time-block be used to do this?
   //
   // TODO: Add code to display the current date in the header of the page.
-});
+
 
 // this function uses day.js to call the curent date in the chosen format below
 var today = dayjs();
@@ -34,10 +34,11 @@ var currentHour = dayjs().hour()
 for (var i = 9; i < 18; i++) {
   // setting the id to hour + the value of i makes the iteration consistent with the element id's
   var id = "hour-" + i;
-  // this 'if' compares the value of the current hour
+  // this 'if' compares the value of the current hour to a parsed string containing numeric. if the current hour equals the digit(s) in the id, the class is present
   if (currentHour === parseInt(id.match(/\d+/)[0], 10)) {
     $("#" + id).addClass("present");
   } 
+  // match(/\d+/)[0], 10 checks the id for one or more numeric matches to the currentHour value.
   else if (currentHour < parseInt(id.match(/\d+/)[0], 10)) {
     $("#" + id).addClass("future");
   }
@@ -46,8 +47,17 @@ for (var i = 9; i < 18; i++) {
   }
 }
 
+// this event listener handles the save button and grabs the id of the row as well as the input in the textbox and stores them in local storage
 $(".saveBtn").on("click", function (){
   var rowID = $(this).parent().attr("id");
   var textInput = $(this).siblings(".description").val();
   localStorage.setItem(rowID, textInput);
 })
+
+for (var i = 0; i < localStorage.length; i++) {
+var key = localStorage.key(i);
+var value = localStorage.getItem(key);
+var textbox = $("#" + key);
+textbox.children(".description").html(value);
+}});
+
