@@ -44,5 +44,11 @@ var value = localStorage.getItem(key);
 var divID = $("#" + key);
 // inputs the value from local storage back into the text area of the respective hour row
 divID.children(".description").html(value);
-}});
+}
+});
 
+// clear all button removes all local storage and empties text areas
+$("#clear-all").on("click", function () {
+  localStorage.clear();
+  $(".description").text("");
+})
