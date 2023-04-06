@@ -10,7 +10,7 @@ https://danielschris96.github.io/work-day-scheduler/
 ## Usage
 The hours of the day are color-coded. Gray blocks represent past hours. The red block represents the current hour. Green blocks represent future hours. The user can input text into any hour block and save the text using the blue button next to the block. When the page is refreshed, the inputed tasks remain in the blocks. The scheduler can be cleared using the 'Clear all' button.<br>
 
-![Screenshot of webpage](./images/page-screenshot.JPG)
+![Screenshot of webpage](./assets/images/page-screenshot.JPG)
 
 ## Credits
 
